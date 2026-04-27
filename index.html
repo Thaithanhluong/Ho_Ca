@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="utf-8">
@@ -13,15 +13,41 @@
       --btn-main-hover: #1f9dc0;
       --shadow: 0 12px 28px rgba(0, 40, 70, 0.25);
     }
-    * { box-sizing: border-box; }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       overflow: hidden;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: url("img/bg2.jpg") center/cover no-repeat fixed;
       position: relative;
+      background: #043b5a;
     }
+
+    #bg-blur,
+    #bg-main {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    #bg-blur {
+      z-index: 0;
+      background-size: cover;
+      filter: blur(14px) saturate(1.1);
+      transform: scale(1.08);
+    }
+
+    #bg-main {
+      z-index: 1;
+      background-size: cover;
+    }
+
     body::before {
       content: "";
       position: fixed;
@@ -30,8 +56,9 @@
         radial-gradient(circle at 80% 10%, rgba(147, 226, 255, 0.2), transparent 35%),
         linear-gradient(180deg, rgba(0, 90, 130, 0.18), rgba(0, 45, 84, 0.33));
       pointer-events: none;
-      z-index: 0;
+      z-index: 2;
     }
+
     .panel {
       position: fixed;
       top: 16px;
@@ -47,9 +74,28 @@
       width: min(95vw, 430px);
       animation: riseIn 0.65s ease;
     }
-    .title { margin: 0 0 8px; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 3px 12px rgba(0,40,70,.35); }
-    .subtitle { margin: 0 0 10px; font-size: 13px; opacity: .95; }
-    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+
+    .title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-shadow: 0 3px 12px rgba(0, 40, 70, 0.35);
+    }
+
+    .subtitle {
+      margin: 0 0 10px;
+      font-size: 13px;
+      opacity: 0.95;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
     .btn {
       border: 0;
       border-radius: 999px;
@@ -58,59 +104,220 @@
       color: #fff;
       font-weight: 600;
       cursor: pointer;
-      transition: transform .2s ease, background-color .2s ease;
-      box-shadow: 0 5px 12px rgba(0,0,0,.2);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
     }
-    .btn:hover { background: var(--btn-main-hover); transform: translateY(-1px); }
-    .audio-group { display: grid; gap: 6px; }
-    .audio-group label { font-size: 12px; font-weight: 600; text-shadow: 0 1px 8px rgba(0,0,0,.2); }
-    audio { width: 100%; height: 34px; border-radius: 999px; }
-    #aquarium { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
-    .fish { position: absolute; will-change: transform,left,top,right,bottom; }
 
-    #B { left: 2cm; top: 0; width: 200px; height: 147px; animation: B 10s linear infinite; }
-    @keyframes B { 20%{bottom:0;} 60%{top:5cm;} 80%{top:10cm;} 100%{top:15cm;} }
-    #C { left:100px; top:400px; width:500px; height:200px; animation:C 10s linear infinite; }
+    .btn:hover {
+      background: var(--btn-main-hover);
+      transform: translateY(-1px);
+    }
+
+    .audio-group {
+      display: grid;
+      gap: 6px;
+    }
+
+    .audio-group label {
+      font-size: 12px;
+      font-weight: 600;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    audio {
+      width: 100%;
+      height: 34px;
+      border-radius: 999px;
+    }
+
+    #aquarium {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .fish {
+      position: absolute;
+      will-change: transform, left, top, right, bottom;
+    }
+
+    #B {
+      left: 2cm;
+      top: 0;
+      width: 200px;
+      height: 147px;
+      animation: B 10s linear infinite;
+    }
+
+    @keyframes B {
+      20% { bottom: 0; }
+      60% { top: 5cm; }
+      80% { top: 10cm; }
+      100% { top: 15cm; }
+    }
+
+    #C {
+      left: 100px;
+      top: 400px;
+      width: 500px;
+      height: 200px;
+      animation: C 10s linear infinite;
+    }
+
     @keyframes C {
-      0%{left:100px; top:400px; transform:scaleX(1);} 20%{left:700px; top:400px; transform:scaleX(1);} 40%{left:700px; top:400px; transform:scaleX(-1);} 60%{left:700px; top:100px; transform:scaleX(-1);} 90%{left:500px; top:100px; transform:scaleX(-1);} 100%{left:500px; top:400px; transform:scaleX(-1);}
+      0% { left: 100px; top: 400px; transform: scaleX(1); }
+      20% { left: 700px; top: 400px; transform: scaleX(1); }
+      40% { left: 700px; top: 400px; transform: scaleX(-1); }
+      60% { left: 700px; top: 100px; transform: scaleX(-1); }
+      90% { left: 500px; top: 100px; transform: scaleX(-1); }
+      100% { left: 500px; top: 400px; transform: scaleX(-1); }
     }
-    #E { right:100px; top:400px; width:500px; height:200px; animation:E 10s linear infinite; }
+
+    #E {
+      right: 100px;
+      top: 400px;
+      width: 500px;
+      height: 200px;
+      animation: E 10s linear infinite;
+    }
+
     @keyframes E {
-      0%{right:3cm; top:10cm; transform:scaleX(1);} 20%{right:10cm; top:10cm; transform:scaleX(1);} 60%{right:12cm; top:10cm; transform:scaleX(-1);} 80%{right:13cm; top:10cm; transform:scaleX(-1);} 90%{right:14cm; top:10cm; transform:scaleX(-1);} 100%{right:20cm; top:10cm; transform:scaleX(-1);}
+      0% { right: 3cm; top: 10cm; transform: scaleX(1); }
+      20% { right: 10cm; top: 10cm; transform: scaleX(1); }
+      60% { right: 12cm; top: 10cm; transform: scaleX(-1); }
+      80% { right: 13cm; top: 10cm; transform: scaleX(-1); }
+      90% { right: 14cm; top: 10cm; transform: scaleX(-1); }
+      100% { right: 20cm; top: 10cm; transform: scaleX(-1); }
     }
-    #H { left:2cm; top:5cm; width:500px; height:200px; animation:H 10s linear infinite; }
-    @keyframes H { 20%{left:2cm; top:5cm;} 40%{left:10cm; top:5cm;} 100%{left:40cm; top:5cm;} }
-    #D { right:-3cm; top:15cm; width:500px; height:200px; animation:D 10s linear infinite; }
-    @keyframes D { 20%{right:-3cm; top:15cm;} 40%{right:10cm; top:15cm;} 100%{right:40cm; top:15cm;} }
-    #G { right:2cm; bottom:10cm; width:200px; height:147px; animation:G 10s linear infinite; }
-    @keyframes G { 0%{bottom:0;} 10%{bottom:2cm;} 40%{bottom:4cm;} 60%{bottom:6cm;} 80%{bottom:12cm;} 100%{bottom:15cm;} }
-    #A { right:2cm; top:4cm; width:500px; height:200px; animation:A 10s linear infinite; }
-    @keyframes A { 20%{right:2cm; top:4cm;} 40%{right:10cm; top:4cm;} 100%{right:40cm; top:4cm;} }
-    #I { left:500px; top:590px; width:200px; height:147px; }
-    #K { left:300px; top:590px; }
+
+    #H {
+      left: 2cm;
+      top: 5cm;
+      width: 500px;
+      height: 200px;
+      animation: H 10s linear infinite;
+    }
+
+    @keyframes H {
+      20% { left: 2cm; top: 5cm; }
+      40% { left: 10cm; top: 5cm; }
+      100% { left: 40cm; top: 5cm; }
+    }
+
+    #D {
+      right: -3cm;
+      top: 15cm;
+      width: 500px;
+      height: 200px;
+      animation: D 10s linear infinite;
+    }
+
+    @keyframes D {
+      20% { right: -3cm; top: 15cm; }
+      40% { right: 10cm; top: 15cm; }
+      100% { right: 40cm; top: 15cm; }
+    }
+
+    #G {
+      right: 2cm;
+      bottom: 10cm;
+      width: 200px;
+      height: 147px;
+      animation: G 10s linear infinite;
+    }
+
+    @keyframes G {
+      0% { bottom: 0; }
+      10% { bottom: 2cm; }
+      40% { bottom: 4cm; }
+      60% { bottom: 6cm; }
+      80% { bottom: 12cm; }
+      100% { bottom: 15cm; }
+    }
+
+    #A {
+      right: 2cm;
+      top: 4cm;
+      width: 500px;
+      height: 200px;
+      animation: A 10s linear infinite;
+    }
+
+    @keyframes A {
+      20% { right: 2cm; top: 4cm; }
+      40% { right: 10cm; top: 4cm; }
+      100% { right: 40cm; top: 4cm; }
+    }
+
+    #I {
+      left: 500px;
+      top: 590px;
+      width: 200px;
+      height: 147px;
+    }
+
+    #K {
+      left: 300px;
+      top: 590px;
+    }
 
     .bubble {
-      position:absolute; bottom:-40px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(180,240,255,.2));
-      opacity:.75; animation: floatUp linear infinite; pointer-events:none; z-index:1;
+      position: absolute;
+      bottom: -40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(180, 240, 255, 0.2));
+      opacity: 0.75;
+      animation: floatUp linear infinite;
+      pointer-events: none;
+      z-index: 3;
     }
+
     @keyframes floatUp {
-      0% { transform:translateY(0) scale(1); opacity:0; }
-      15% { opacity:.8; }
-      100% { transform:translateY(-110vh) scale(1.2); opacity:0; }
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.2);
+        opacity: 0;
+      }
     }
+
     @keyframes riseIn {
-      from { opacity:0; transform:translateY(-8px); }
-      to { opacity:1; transform:translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @media (max-width: 768px) {
-      .panel { top:10px; left:10px; right:10px; width:auto; }
-      .title { font-size:20px; }
-      .subtitle { font-size:12px; }
+      .panel {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+      }
+      .title {
+        font-size: 20px;
+      }
+      .subtitle {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
+  <div id="bg-blur" aria-hidden="true"></div>
+  <div id="bg-main" aria-hidden="true"></div>
+
   <section class="panel">
     <h1 class="title">Ho Ca De Thuong</h1>
     <p class="subtitle">Chon nen va thuong thuc nhac trong luc ngam dan ca boi.</p>
@@ -138,17 +345,59 @@
     <div class="fish" id="B"><img src="img/ca1.gif" width="298" height="149" alt="Ca 1"></div>
     <div class="fish" id="C"><img src="img/ca2.gif" width="100" height="50" alt="Ca 2"></div>
     <div class="fish" id="E"><img src="img/ca3.gif" width="400" height="350" alt="Ca 3"></div>
-    <div class="fish" id="H"><img src="img/ca%20nho.gif" width="400" height="50" alt="Ca nho"></div>
-    <div class="fish" id="D"><img src="img/ca%20tam%20giac%20tim.gif" width="149" height="149" alt="Ca tim"></div>
-    <div class="fish" id="G"><img src="img/C%C3%A1%20Gif%20(40).gif" width="100" height="100" alt="Ca gif 40"></div>
-    <div class="fish" id="A"><img src="img/C%C3%A1%20Gif%20(71).gif" width="298" height="149" alt="Ca gif 71"></div>
+    <div class="fish" id="H"><img src="img/ca nho.gif" width="400" height="50" alt="Ca nho"></div>
+    <div class="fish" id="D"><img src="img/ca tam giac tim.gif" width="149" height="149" alt="Ca tim"></div>
+    <div class="fish" id="G"><img src="img/Cá Gif (40).gif" width="100" height="100" alt="Ca gif 40"></div>
+    <div class="fish" id="A"><img src="img/Cá Gif (71).gif" width="298" height="149" alt="Ca gif 71"></div>
     <div class="fish" id="I"><img src="img/danca.gif" width="1500" height="149" alt="Dan ca"></div>
     <div class="fish" id="K"><img src="img/rongvada.png" width="250" height="230" alt="Rong bien"></div>
   </main>
 
   <script>
+    var bgModeMap = {
+      "img/bg1.webp": "no-upscale",
+      "img/bga.jpg": "no-upscale",
+      "img/bg2.jpg": "cover",
+      "img/bg3.jpg": "cover"
+    };
+    var bgCache = {};
+    var activeBg = "img/bg2.jpg";
+
+    function applyBg(path) {
+      var main = document.getElementById("bg-main");
+      var blur = document.getElementById("bg-blur");
+      blur.style.backgroundImage = "url('" + path + "')";
+      main.style.backgroundImage = "url('" + path + "')";
+
+      if (bgModeMap[path] !== "no-upscale") {
+        main.style.backgroundSize = "cover";
+        return;
+      }
+
+      var cached = bgCache[path];
+      if (!cached) {
+        var img = new Image();
+        img.onload = function () {
+          bgCache[path] = { w: img.naturalWidth, h: img.naturalHeight };
+          if (activeBg === path) {
+            applyBg(path);
+          }
+        };
+        img.src = path;
+        return;
+      }
+
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var scale = Math.min(1, vw / cached.w, vh / cached.h);
+      var w = Math.round(cached.w * scale);
+      var h = Math.round(cached.h * scale);
+      main.style.backgroundSize = w + "px " + h + "px";
+    }
+
     function setBackground(path) {
-      document.body.style.backgroundImage = "url('" + path + "')";
+      activeBg = path;
+      applyBg(path);
     }
 
     (function createBubbles() {
@@ -165,6 +414,15 @@
         layer.appendChild(b);
       }
     })();
+
+    window.addEventListener("resize", function () {
+      applyBg(activeBg);
+    });
+
+    setBackground(activeBg);
   </script>
 </body>
 </html>
+
+
+
